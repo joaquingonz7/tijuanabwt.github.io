@@ -46,7 +46,7 @@ function getWaitTimes()
 
                 var descriptionNodes = items[i].childNodes[1].childNodes;
                 var laneType = "";
-                var lanesOpenRegex = new RegExp("(\\w+) Lanes: At (\\d{1,2}:\\d{1,2} \\w{2}) PDT (\\d+) min delay (\\d+) lane\\(s\\) open");
+                var lanesOpenRegex = new RegExp("(\\w+) Lanes: At (\\d{1,2}:\\d{1,2} \\w{2}) P[S|D]T (\\d+) min delay (\\d+) lane\\(s\\) open");
                 var lanesClosedRegex = new RegExp("(\w+) Lanes:\s+Lanes Closed");
                 var laneTypeEmoji = "";
 
@@ -62,7 +62,7 @@ function getWaitTimes()
                         if(lanesOpenRegex.test(nodeText)) 
                         {
 
-                            var match = lanesOpenRegex.exec(nodeText)
+                            var match = lanesOpenRegex.exec(nodeText);
                             var laneType = laneTypeEmoji + "-" + match[1] + additionalTitle;
                             var minutesWait = parseInt(match[3]);
                             var alertLevel;
