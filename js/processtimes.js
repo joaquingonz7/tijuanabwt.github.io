@@ -29,16 +29,19 @@ function getWaitTimes()
                 var title = items[i].firstChild.textContent;
                 var tableElement = null;
                 var additionalTitle = "";
+                var lastUpdateElement = null;
 
                 if(title == "Otay Mesa - Passenger") 
                 {
                     additionalTitle = "";
                     tableElement = document.getElementById("otayBody"); 
+                    lastUpdateElement = document.getElementById("OtayUpdateTime"); 
                 }
                 else 
-                { 
+                {
                     tableElement = document.getElementById("sanYsidroBody"); 
-
+                    lastUpdateElement = document.getElementById("SYUpdateTime");
+                    
                     if(title == "San Ysidro - Cross Border Express") { additionalTitle = " CBX"; }
                     else if(title == "San Ysidro - PedWest") { additionalTitle = " PedWest"; }
                     else { additionalTitle = ""; }
@@ -64,6 +67,7 @@ function getWaitTimes()
 
                             var match = lanesOpenRegex.exec(nodeText);
                             var laneType = laneTypeEmoji + "-" + match[1] + additionalTitle;
+                            if(title == "San Ysidro" || title == "Otay Mesa - Passenger") { var lastUpdateTime = match[2]; }
                             var minutesWait = parseInt(match[3]);
                             var alertLevel;
                             if(minutesWait <= 30) { alertLevel = 0; }
@@ -72,6 +76,8 @@ function getWaitTimes()
                             var hoursWait = Math.floor(minutesWait / 60);
                             minutesWait = minutesWait % 60;
                             var formattedWait = String(hoursWait) + ":" + String(minutesWait).padStart(2, '0') + " h";
+                            var formattedLastUpdateTime = "Last updated at: " + String(lastUpdateTime);
+                            lastUpdateElement.innerHTML = formattedLastUpdateTime;
                             var rowToInsert = tableRowTemplate.format(laneType, match[4], warningLevels[alertLevel], formattedWait);
                             tableElement.insertAdjacentHTML("beforeend", rowToInsert);
                         }
