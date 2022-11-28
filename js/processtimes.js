@@ -11,8 +11,8 @@ function getWaitTimes()
 {
     var tableRowTemplate = 
     `<tr>
-    <td>{0}</th>
-    <td>{1}</th>
+    <td class="text-white">{0}</th>
+    <td class="text-white">{1}</th>
     <td {2}>{3}</th>
     </tr>`
     var warningLevels = ['class="table-success"', 'class="table-warning"', 'class="table-danger"']
