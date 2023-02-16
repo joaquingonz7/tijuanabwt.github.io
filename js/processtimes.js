@@ -58,8 +58,8 @@ function getWaitTimes()
                     var currentNodeType = descriptionNodes[j].nodeName;
                     var nodeText = descriptionNodes[j].textContent.trim();
                     if(currentNodeType == "h4") { laneType = nodeText; }
-                    if(laneType == "Passenger Vehicles") { laneTypeEmoji = "🚗"; }
-                    if(laneType == "Pedestrian") { laneTypeEmoji = "🚶"; }
+                    if(laneType == "Passenger Vehicles") { laneTypeEmoji = "&#128663;"; }
+                    if(laneType == "Pedestrian") { laneTypeEmoji = "&#128694;"; }
                     if(currentNodeType == "#text")
                     {
                         if(lanesOpenRegex.test(nodeText)) 
